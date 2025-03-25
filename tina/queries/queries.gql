@@ -1,0 +1,21 @@
+query pageQuery {
+  postConnection {
+    edges {
+      node {
+        id
+        date
+        title
+        excerpt
+        _sys {
+          filename
+        }
+      }
+    }
+  }
+}
+
+query blogPostQuery($relativePath: String!) {
+  post(relativePath: $relativePath) {
+    ...PostParts
+  }
+}

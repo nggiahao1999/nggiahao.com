@@ -1,0 +1,745 @@
+import type { TinaField, Template } from "tinacms";
+import { ImagePrevSize } from "next-seo/lib/types";
+
+export const imagePrevSize: ImagePrevSize[] = ["none", "standard", "large"];
+export const CUSTOM_FACEBOOK_FIELD_REQUIRED_APP_ID_NAME = "requiredAppId";
+
+export const profile: TinaField = {
+  type: "object",
+  label: "Open Graph Profile",
+  name: "profile",
+  fields: [
+    {
+      type: "string",
+      label: "FirstName",
+      name: "firstName",
+    },
+    {
+      type: "string",
+      label: "LastName",
+      name: "lastName",
+    },
+    {
+      type: "string",
+      label: "Username",
+      name: "username",
+    },
+    {
+      type: "string",
+      label: "Gender",
+      name: "gender",
+    },
+  ],
+};
+
+export const book: TinaField = {
+  type: "object",
+  label: "Open Graph Book",
+  name: "book",
+  fields: [
+    {
+      type: "string",
+      label: "Authors",
+      name: "authors",
+      list: true,
+    },
+    {
+      type: "string",
+      label: "ISBN",
+      name: "isbn",
+    },
+    {
+      type: "datetime",
+      label: "releaseDate",
+      name: "releaseDate",
+    },
+    {
+      type: "string",
+      label: "Tags",
+      name: "tags",
+      list: true,
+    },
+  ],
+};
+
+export const article: TinaField = {
+  type: "object",
+  label: "Open Graph Article",
+  name: "article",
+  fields: [
+    {
+      type: "datetime",
+      label: "PublishedTime",
+      name: "publishedTime",
+    },
+    {
+      type: "datetime",
+      label: "ModifiedTime",
+      name: "modifiedTime",
+    },
+    {
+      type: "datetime",
+      label: "ExpirationTime",
+      name: "expirationTime",
+    },
+    {
+      type: "string",
+      label: "Authors",
+      name: "authors",
+      list: true,
+    },
+    {
+      type: "string",
+      label: "Section",
+      name: "section",
+    },
+    {
+      type: "string",
+      label: "Tags",
+      name: "tags",
+      list: true,
+    },
+  ],
+};
+
+export const video: TinaField = {
+  type: "object",
+  label: "Open Graph Video",
+  name: "video",
+  fields: [
+    {
+      type: "object",
+      label: "Actors",
+      name: "actors",
+      list: true,
+      fields: [
+        {
+          type: "string",
+          label: "Profile",
+          name: "profile",
+          required: true,
+        },
+        {
+          type: "string",
+          label: "Role",
+          name: "role",
+        },
+      ],
+    },
+    {
+      type: "string",
+      label: "Directors",
+      name: "directors",
+      list: true,
+    },
+    {
+      type: "string",
+      label: "Writers",
+      name: "writers",
+      list: true,
+    },
+    {
+      type: "number",
+      label: "Duration",
+      name: "duration",
+    },
+    {
+      type: "datetime",
+      label: "ReleaseDate",
+      name: "releaseDate",
+    },
+    {
+      type: "string",
+      label: "Tags",
+      name: "tags",
+      list: true,
+    },
+    {
+      type: "string",
+      label: "Series",
+      name: "series",
+    },
+  ],
+};
+
+export const openGraph: TinaField = {
+  type: "object",
+  label: "Open Graph",
+  name: "openGraph",
+  fields: [
+    {
+      type: "string",
+      label: "url",
+      name: "url",
+    },
+    {
+      type: "string",
+      label: "Type",
+      name: "type",
+    },
+    {
+      type: "string",
+      label: "Title",
+      name: "title",
+    },
+    {
+      type: "string",
+      label: "Description",
+      name: "description",
+      ui: {
+        component: "textarea",
+      },
+    },
+    {
+      type: "object",
+      label: "Open Graph Images",
+      name: "images",
+      list: true,
+      fields: [
+        {
+          type: "string",
+          label: "Url",
+          name: "url",
+          required: true,
+        },
+        {
+          type: "number",
+          label: "Width",
+          name: "width",
+        },
+        {
+          type: "number",
+          label: "Height",
+          name: "height",
+        },
+        {
+          type: "string",
+          label: "Alt",
+          name: "alt",
+        },
+        {
+          type: "string",
+          label: "Type",
+          name: "type",
+        },
+        {
+          type: "string",
+          label: "SecureUrl",
+          name: "secureUrl",
+        },
+      ],
+    },
+    {
+      type: "object",
+      label: "Open Graph Videos",
+      name: "videos",
+      list: true,
+      fields: [
+        {
+          type: "string",
+          label: "Url",
+          name: "url",
+          required: true,
+        },
+        {
+          type: "number",
+          label: "Width",
+          name: "width",
+        },
+        {
+          type: "number",
+          label: "Height",
+          name: "height",
+        },
+        {
+          type: "string",
+          label: "Alt",
+          name: "alt",
+        },
+        {
+          type: "string",
+          label: "Type",
+          name: "type",
+        },
+        {
+          type: "string",
+          label: "SecureUrl",
+          name: "secureUrl",
+        },
+      ],
+    },
+    {
+      type: "number",
+      label: "DefaultImageHeight",
+      name: "defaultImageHeight",
+    },
+    {
+      type: "number",
+      label: "DefaultImageWidth",
+      name: "defaultImageWidth",
+    },
+    {
+      type: "string",
+      label: "Locale",
+      name: "locale",
+    },
+    {
+      type: "string",
+      label: "SiteName",
+      name: "siteName",
+    },
+    profile,
+    book,
+    article,
+    video,
+  ],
+};
+
+export const facebook: TinaField = {
+  type: "object",
+  label: "Facebook",
+  name: "facebook",
+  fields: [
+    {
+      type: "string",
+      label: "AppId",
+      // reason why we prefix required fields with "required" --> https://github.com/tinacms/tinacms/issues/3150#issuecomment-1243908701
+      name: CUSTOM_FACEBOOK_FIELD_REQUIRED_APP_ID_NAME,
+      required: true,
+    },
+  ],
+};
+
+export const twitter: TinaField = {
+  type: "object",
+  label: "Twitter",
+  name: "twitter",
+  fields: [
+    {
+      type: "string",
+      label: "Handle",
+      name: "handle",
+    },
+    {
+      type: "string",
+      label: "Site",
+      name: "site",
+    },
+    {
+      type: "string",
+      label: "CardType",
+      name: "cardType",
+    },
+  ],
+};
+
+export const HTML5MetaTag: Template = {
+  label: "HTML5MetaTag",
+  name: "html5MetaTag",
+  fields: [
+    {
+      type: "string",
+      label: "Name",
+      name: "name",
+      required: true,
+    },
+    {
+      type: "string",
+      label: "Content",
+      name: "content",
+      required: true,
+    },
+    {
+      type: "string",
+      label: "KeyOverride",
+      name: "keyOverride",
+    },
+  ],
+};
+
+export const RDFaMetaTag: Template = {
+  label: "RDFaMetaTag",
+  name: "rdfaaMetaTag",
+  fields: [
+    {
+      type: "string",
+      label: "Property",
+      name: "property",
+      required: true,
+    },
+    {
+      type: "string",
+      label: "Content",
+      name: "content",
+      required: true,
+    },
+    {
+      type: "string",
+      label: "KeyOverride",
+      name: "keyOverride",
+    },
+  ],
+};
+
+export const HTTPEquivMetaTag: Template = {
+  label: "HTTPEquivMetaTag",
+  name: "httpEquivMetaTag",
+  fields: [
+    {
+      type: "string",
+      label: "HttpEquiv",
+      name: "httpEquiv",
+      options: [
+        "content-security-policy",
+        "content-type",
+        "default-style",
+        "x-ua-compatible",
+        "refresh",
+      ],
+    },
+    {
+      type: "string",
+      label: "Content",
+      name: "content",
+      required: true,
+    },
+    {
+      type: "string",
+      label: "KeyOverride",
+      name: "keyOverride",
+    },
+  ],
+};
+
+export const additionalMetaTags: TinaField = {
+  type: "object",
+  label: "Addtional meta tags",
+  name: "addtionalMetaTags",
+  list: true,
+  templates: [HTML5MetaTag, RDFaMetaTag, HTTPEquivMetaTag],
+};
+
+export const additionalLinkTags: TinaField = {
+  type: "object",
+  label: "Additional link tags",
+  name: "addtionalLinkTags",
+  list: true,
+  fields: [
+    {
+      type: "string",
+      label: "Rel",
+      name: "rel",
+      required: true,
+    },
+    {
+      type: "string",
+      label: "Href",
+      name: "href",
+      required: true,
+    },
+    {
+      type: "string",
+      label: "Sizes",
+      name: "sizes",
+    },
+    {
+      type: "string",
+      label: "Type",
+      name: "type",
+    },
+    {
+      type: "string",
+      label: "Color",
+      name: "color",
+    },
+    {
+      type: "string",
+      label: "KeyOverride",
+      name: "keyOverride",
+    },
+    {
+      type: "string",
+      label: "As",
+      name: "as",
+    },
+    {
+      type: "string",
+      label: "CrossOrigin",
+      name: "crossOrigin",
+    },
+  ],
+};
+
+export const mobileAlternate: TinaField = {
+  type: "object",
+  label: "Mobile Alternate",
+  name: "mobileAlternate",
+  fields: [
+    {
+      type: "string",
+      label: "Media",
+      name: "media",
+    },
+    {
+      type: "string",
+      label: "Href",
+      name: "href",
+    },
+  ],
+};
+
+export const languageAlternates: TinaField = {
+  type: "object",
+  label: "Language Alternates",
+  name: "languageAlternates",
+  list: true,
+  fields: [
+    {
+      type: "string",
+      label: "HrefLang",
+      name: "hrefLang",
+    },
+    {
+      type: "string",
+      label: "Href",
+      name: "href",
+    },
+  ],
+};
+
+export const robotsProps: TinaField = {
+  type: "object",
+  label: "robotsProps",
+  name: "robotsProps",
+  fields: [
+    {
+      type: "boolean",
+      label: "Nosnippet",
+      name: "nosnippet",
+    },
+    {
+      type: "number",
+      label: "max Snippet",
+      name: "maxSnippet",
+    },
+    {
+      type: "string",
+      label: "MaxImagePreview",
+      name: "maxImagePreview",
+      list: true,
+      options: imagePrevSize,
+    },
+    {
+      type: "number",
+      label: "max video preview",
+      name: "maxVideoPreview",
+    },
+    {
+      type: "boolean",
+      label: "Noarchive",
+      name: "noarchive",
+    },
+    {
+      type: "string",
+      label: "UnavailableAfter",
+      name: "unavailableAfter",
+    },
+    {
+      type: "boolean",
+      label: "Noimageindex",
+      name: "noimageindex",
+    },
+    {
+      type: "boolean",
+      label: "Notranslate",
+      name: "notranslate",
+      description: "https://github.com/garmeeh/next-seo#robotsprops",
+    },
+  ],
+};
+
+export const defaultSeoPageProps: TinaField = {
+  name: "defaultSeo",
+  label: "Default Seo",
+  type: "object",
+  fields: [
+    {
+      type: "number",
+      label: "Open Graph Image Width",
+      name: "defaultOpenGraphImageWidth",
+    },
+    {
+      type: "number",
+      label: "Open Graph Image Height",
+      name: "defaultOpenGraphImageHeight",
+    },
+    {
+      type: "number",
+      label: "Open Graph Video Width",
+      name: "defaultOpenGraphImageWidth",
+    },
+    {
+      type: "number",
+      label: "Open Graph Video Height",
+      name: "defaultOpenGraphImageHeight",
+    },
+    {
+      type: "string",
+      label: "Title",
+      name: "title",
+    },
+    {
+      type: "string",
+      label: "Description",
+      name: "description",
+      ui: {
+        component: "textarea",
+      },
+    },
+    openGraph,
+    facebook,
+    twitter,
+  ],
+};
+
+export const expertDefaultSeoPageProps: TinaField = {
+  name: "defaultSeo",
+  label: "Default Seo",
+  type: "object",
+  fields: [
+    {
+      type: "number",
+      label: "Open Graph Image Width",
+      name: "defaultOpenGraphImageWidth",
+    },
+    {
+      type: "number",
+      label: "Open Graph Image Height",
+      name: "defaultOpenGraphImageHeight",
+    },
+    {
+      type: "number",
+      label: "Open Graph Video Width",
+      name: "defaultOpenGraphImageWidth",
+    },
+    {
+      type: "number",
+      label: "Open Graph Video Height",
+      name: "defaultOpenGraphImageHeight",
+    },
+    {
+      type: "string",
+      label: "Title",
+      name: "title",
+    },
+    {
+      type: "string",
+      label: "Title Template",
+      name: "titleTemplate",
+    },
+    {
+      type: "string",
+      label: "Default Title",
+      name: "defaultTemplate",
+    },
+    robotsProps,
+    {
+      type: "string",
+      label: "Description",
+      name: "description",
+      ui: {
+        component: "textarea",
+      },
+    },
+    {
+      type: "string",
+      label: "Canonical",
+      name: "canonical",
+    },
+    mobileAlternate,
+    languageAlternates,
+    openGraph,
+    facebook,
+    twitter,
+    additionalMetaTags,
+    additionalLinkTags,
+  ],
+};
+
+export const seoPageProps: TinaField = {
+  name: "seo",
+  label: "SEO",
+  type: "object",
+  fields: [
+    {
+      type: "string",
+      label: "SEO Title",
+      name: "seo_title",
+    },
+    {
+      type: "string",
+      label: "Description",
+      name: "description",
+      ui: {
+        component: "textarea",
+      },
+    },
+    openGraph,
+    facebook,
+    twitter,
+  ],
+};
+
+export const expertSeoPageProps: TinaField = {
+  name: "seo",
+  label: "SEO",
+  type: "object",
+  fields: [
+    {
+      type: "string",
+      label: "Title",
+      name: "title",
+    },
+    {
+      type: "string",
+      label: "Title Template",
+      name: "titleTemplate",
+    },
+    {
+      type: "string",
+      label: "Default Title",
+      name: "defaultTemplate",
+    },
+    {
+      type: "boolean",
+      label: "Noindex",
+      name: "noindex",
+    },
+    {
+      type: "boolean",
+      label: "Nofollow",
+      name: "nofollow",
+    },
+    robotsProps,
+    {
+      type: "string",
+      label: "Description",
+      name: "description",
+      ui: {
+        component: "textarea",
+      },
+    },
+    {
+      type: "string",
+      label: "Canonical",
+      name: "canonical",
+    },
+    mobileAlternate,
+    languageAlternates,
+    openGraph,
+    facebook,
+    twitter,
+    additionalMetaTags,
+    additionalLinkTags,
+  ],
+};
