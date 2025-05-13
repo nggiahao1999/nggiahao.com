@@ -8,10 +8,8 @@ export const metadata: Metadata = {
 const workPage = () => {
   return (
     <section>
-      <div className="pb-10">
-        <h1 className="text-2xl font-bold pb-8">Work</h1>
-        wip.
-      </div>
+      <h1 className="text-2xl font-bold pb-8">Work</h1>
+      <p>wip.</p>
     </section>
   );
 };

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 
 export default function PapersPage() {
   return (
-    <section className="pb-5">
+    <section>
       <h1 className="text-2xl font-bold pb-8">Papers</h1>
       wip.
     </section>

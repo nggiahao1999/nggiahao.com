@@ -23,6 +23,9 @@ const booksPage = () => {
           either while traveling or at bedtime.
         </p>
       </div>
+      <div className="grid md:grid-cols-2 gap-8">
+        (updating...)
+      </div>
     </section>
   );
 };

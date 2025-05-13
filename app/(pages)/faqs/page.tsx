@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 const pinsPage = () => {
   return (
-    <section className="pb-5">
+    <section>
       <h1 className="text-2xl font-bold pb-8">FAQs</h1>
       wip.
     </section>

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 const MusicPage = () => {
   return (
-    <section className="pb-5">
+    <section>
       <h1 className="text-2xl font-bold pb-8">Music</h1>
       wip.
     </section>

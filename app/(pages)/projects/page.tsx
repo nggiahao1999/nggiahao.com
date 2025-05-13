@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 
 const ProjectsPage = () => {
   return (
-    <section className="pb-5">
+    <section>
       <h1 className="text-2xl font-bold pb-8">Projects</h1>
       wip.
     </section>

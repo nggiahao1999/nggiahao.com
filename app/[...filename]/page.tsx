@@ -1,5 +1,5 @@
 import React from "react";
-import client from "../../../tina/__generated__/client";
+import client from "@/tina/__generated__/client";
 import PostClientPage from "./client-page";
 
 export default async function PostPage({
