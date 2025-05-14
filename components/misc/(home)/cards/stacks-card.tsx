@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import React, { SVGProps } from "react";
+import React from "react";
 import {
   IconCloudflare,
   IconFirebase,

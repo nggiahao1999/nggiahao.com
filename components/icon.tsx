@@ -1,7 +1,6 @@
 "use client";
 import * as BoxIcons from "react-icons/bi";
 import React from "react";
-import { useLayout } from "./layout/layout-context";
 
 export const IconOptions = {
   Tina: (props) => (
@@ -77,11 +76,10 @@ const iconSizeClass = {
 
 export const Icon = ({
   data,
-  parentColor = "",
+  // parentColor = "",
   className = "",
   tinaField = "",
 }) => {
-  const { theme } = useLayout();
 
   if (IconOptions[data.name] === null || IconOptions[data.name] === undefined) {
     return null;
@@ -96,11 +94,7 @@ export const Icon = ({
       ? iconSizeClass[size]
       : iconSizeClass[Object.keys(iconSizeClass)[size]];
 
-  const iconColor = color
-    ? color === "primary"
-      ? theme.color
-      : color
-    : theme.color;
+  const iconColor = color;
 
   if (style == "circle") {
     return (
@@ -113,12 +107,7 @@ export const Icon = ({
     );
   } else {
     const iconColorClasses =
-      iconColorClass[
-        parentColor === "primary" &&
-        (iconColor === theme.color || iconColor === "primary")
-          ? "white"
-          : iconColor
-      ].regular;
+      iconColorClass[iconColor].regular;
     return (
       <IconSVG
         data-tina-field={tinaField}

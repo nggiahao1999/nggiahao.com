@@ -1,5 +1,4 @@
 import { ComponentProps } from 'react'
-import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
 
 const Link = ({ children, ...props }: ComponentProps<'a'>) => (
   <a

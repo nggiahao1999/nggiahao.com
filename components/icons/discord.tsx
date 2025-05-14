@@ -1,3 +1,5 @@
+import React from "react";
+
 export function LogosDiscordIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg

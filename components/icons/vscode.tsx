@@ -1,3 +1,5 @@
+import React from "react";
+
 export function LogosVisualStudioCode(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg

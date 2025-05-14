@@ -31,10 +31,10 @@ export function capitalize(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export default async function fetcher<JSON = any>(
-  input: RequestInfo,
-  init?: RequestInit
-): Promise<JSON> {
-  const res = await fetch(input, init);
-  return res.json();
-}
+// export default async function fetcher<JSON = any>(
+//   input: RequestInfo,
+//   init?: RequestInit
+// ): Promise<JSON> {
+//   const res = await fetch(input, init);
+//   return res.json();
+// }

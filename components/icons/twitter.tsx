@@ -1,3 +1,5 @@
+import React from "react";
+
 export function RiTwitterXFill(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
