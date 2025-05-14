@@ -1,11 +1,8 @@
 "use client";
 import { format } from "date-fns";
 import Link from "next/link";
-import Image from "next/image";
 import React from "react";
-import { BsArrowRight } from "react-icons/bs";
 import { Rss } from "lucide-react";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
 import {
   PostConnectionQuery,
   PostConnectionQueryVariables,
@@ -33,7 +30,7 @@ export default function PostsClientPage(props: ClientPostProps) {
         </a>{" "}
         or follow on
         <a
-          href="https://x.com/nggiahao"
+          href="https://x.com/nggiahao9o9"
           target="_blank"
           className="link mx-1"
         >

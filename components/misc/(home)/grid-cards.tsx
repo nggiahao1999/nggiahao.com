@@ -1,6 +1,6 @@
 import {
   GithubStats,
-  LastesPost,
+  LatestPost,
   StacksCard,
   MusicCard,
   GithubLink,
@@ -37,7 +37,7 @@ export default function GridCards() {
             />
           </Link>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/nggiahao"
             target="_blank"
             className="hover:scale-95 duration-500 transform-gpu h-[4.125rem] flex flex-col justify-center items-center rounded-lg text-white bg-[#2867b2] w-full "
           >
@@ -47,7 +47,7 @@ export default function GridCards() {
             </p>
           </a>
           <a
-            href="#"
+            href="https://x.com/nggiahao9o9"
             target="_blank"
             className="hover:scale-95 duration-500 transform-gpu h-[4.125rem] flex flex-col justify-center items-center rounded-lg text-white bg-[#1c1d1f] w-full"
           >
@@ -63,7 +63,7 @@ export default function GridCards() {
             <p className="text-[12px]">(web drafts)</p>
           </a>
           <a
-            href="#"
+            href="https://www.facebook.com/hao.dajgja"
             target="_blank"
             className="hover:scale-95 duration-500 transform-gpu h-[4.125rem] flex flex-col justify-center items-center rounded-lg text-white bg-[#2867b2] w-full "
           >
@@ -74,7 +74,7 @@ export default function GridCards() {
           </a>
         </div>
         <StacksCard />
-        <LastesPost />
+        <LatestPost />
         <Link href={"/"}
           className="h-36 rounded-lg overflow-hidden relative hover:scale-95 duration-500 transform-gpu">
           <Image

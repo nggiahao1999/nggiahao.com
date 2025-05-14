@@ -84,7 +84,7 @@ const BackgroundPattern = () => {
   }
 
   const colours = ["#39d353", "#0e4429", "#0e4429", "#006d32", "#161b22"];
-  const days = new Array(51)
+  const days = new Array(46)
     .fill(null)
     // eslint-disable-next-line no-unused-vars
     .map(_ => colours[Math.floor(seededRandom() * colours.length)]);
