@@ -1,5 +1,5 @@
 ---
-title: "Triển khai chức năng Ban tài khoản trong Laravel"
+title: Triển khai chức năng Ban tài khoản trong Laravel
 description: >-
   Trong bất kỳ ứng dụng nào, dù là web app hay mobile app, việc xử lý những user
   "quá khích" hoặc không tuân thủ "Terms" là điều không thể tránh khỏi. Khi đó,
@@ -7,9 +7,169 @@ description: >-
   trì sự lành mạnh trong hệ thống.
 author: content/authors/nguyen-gia-hao.md
 category: []
-excerpt: ''
+excerpt: >
+  Trong bất kỳ ứng dụng nào, dù là web app hay mobile app, việc xử lý những user
+  "quá khích" hoặc không tuân thủ "Terms" là điều không thể tránh khỏi. Khi đó,
+  chức năng ban account trở thành “vũ khí” cần thiết giúp bạn kiểm soát và duy
+  trì sự lành mạnh trong hệ thống.
+
+
+  Không đơn giản chỉ là khóa tài khoản, hệ thống ban cần phải linh hoạt, cho
+  phép ban tạm thời hay permanent, lưu lại reason, thông tin về ai đã ban, và
+  khi nào ban hết hiệu lực.
 ---
 
-Trong bất kỳ ứng dụng nào, dù là web app hay mobile app, việc xử lý những user "quá khích" hoặc không tuân thủ "Terms" là điều không thể tránh khỏi. Khi đó, chức năng ban account trở thành “vũ khí” cần thiết giúp bạn kiểm soát và duy trì sự lành mạnh trong hệ thống.
+🔧 1. Tạo bảng bans
 
-Không đơn giản chỉ là khóa tài khoản, hệ thống ban cần phải linh hoạt, cho phép ban tạm thời hay permanent, lưu lại reason, thông tin về ai đã ban, và khi nào ban hết hiệu lực.
+Schema::create('bans', function (Blueprint $table) {
+
+$table->increments('id');
+
+$table->morphs('bannable'); // Bất kỳ đối tượng nào có thể bị ban
+
+$table->nullableMorphs('created\_by'); // Ai đã ban (Admin, Moderator,...)
+
+$table->string('reason\_code')->nullable(); // Mã lý do ban (VD: spam, abuse, other,...)
+
+$table->text('comment')->nullable(); // Ghi chú chi tiết nếu cần
+
+$table->timestamp('expired\_at')->nullable(); // Nếu null = ban vĩnh viễn
+
+$table->softDeletes(); // Gỡ ban = soft delete
+
+$table->timestamps();
+
+$table->index('expired\_at');
+
+$table->index('reason\_code');
+
+});
+
+📌 Lưu ý: Morph cho phép bạn tái sử dụng bảng bans cho nhiều loại model, rất tiện và “DRY” (Don't Repeat Yourself).
+
+📦 Model Ban
+
+class Ban extends Model
+
+{
+
+use SoftDeletes;
+
+protected $fillable = \[
+
+'reason\_code',
+
+'comment',
+
+'expired\_at',
+
+];
+
+protected $dates = \['expired\_at'];
+
+public function bannable()
+
+{
+
+return $this->morphTo();
+
+}
+
+public function createdBy()
+
+{
+
+return $this->morphTo('created\_by');
+
+}
+
+public function isActive(): bool
+
+{
+
+return is\_null($this->expired\_at) || now()->lessThan($this->expired\_at);
+
+}
+
+}
+
+
+
+
+👤 2. Kết nối với model User (hoặc bất kỳ model nào bạn muốn ban)
+
+class User extends Authenticatable
+
+{
+
+public function bans()
+
+{
+
+return $this->morphMany(Ban::class, 'bannable');
+
+}
+
+public function activeBan()
+
+{
+
+return $this->bans()
+
+->whereNull('deleted\_at')
+
+->where(function ($query) {
+
+$query->whereNull('expired\_at')->orWhere('expired\_at', '>', now());
+
+})
+
+->latest('created\_at')
+
+->first();
+
+}
+
+public function isBanned(): bool
+
+{
+
+return !is\_null($this->activeBan());
+
+}
+
+}
+
+
+
+
+
+
+
+🚪 3. Middleware chặn người bị ban
+
+Ngăn người dùng bị ban truy cập vào hệ thống như sau:
+
+public function handle($request, Closure $next) { $user = auth()->user(); if ($user && $user->isBanned()) { abort(403, 'Tài khoản của bạn đã bị khóa.'); } return $next($request); }
+
+🧑‍⚖️ 4. Ban và gỡ ban trong Controller
+
+public function banUser(User $user, Request $request) { $user->bans()->create(\[ 'reason\_code' => $request->input('reason\_code'), 'comment' => $request->input('comment'), 'expired\_at' => $request->input('expired\_at'), 'created\_by\_type' => auth()->check() ? get\_class(auth()->user()) : null, 'created\_by\_id' => auth()->id(), ]); return response()->json(\['message' => 'Người dùng đã bị ban.']); } public function unbanUser(User $user) { $user->bans() ->whereNull('deleted\_at') ->latest() ->first()?->delete(); return response()->json(\['message' => 'Người dùng đã được gỡ ban.']); }
+
+💡 Bạn có thể tuỳ chỉnh logic sao cho một user chỉ có một ban đang hoạt động cùng lúc, nếu cần.
+
+🕵️‍♂️ 5. Lọc theo lý do bị ban
+
+$spamBans = Ban::where('reason\_code', 'spam')->with('bannable')->get();
+
+Hoặc lọc tất cả người dùng đang bị ban vì “abuse”:
+
+$users = User::whereHas('bans', function ($query) { $query->where('reason\_code', 'abuse') ->where(function ($q) { $q->whereNull('expired\_at')->orWhere('expired\_at', '>', now()); }) ->whereNull('deleted\_at'); })->get();
+
+⏰ 6. Tự động gỡ ban (tùy chọn)
+
+Thay vì phải gỡ thủ công, bạn có thể chạy một scheduled job xoá các ban đã hết hạn:
+
+User::whereHas('bans', function ($query) { $query->whereNotNull('expired\_at') ->where('expired\_at', '\<=', now()) ->whereNull('deleted\_at'); })->each(function ($user) { $user->bans() ->where('expired\_at', '\<=', now()) ->whereNull('deleted\_at') ->delete(); });
+
+Đưa vào Kernel.php chạy mỗi giờ, hoặc mỗi ngày tùy bạn.
