@@ -1,4 +1,5 @@
 import type { Collection } from "tinacms";
+import slugify from "slugify";
 
 const Post: Collection = {
   label: "Blog Posts",
@@ -8,7 +9,14 @@ const Post: Collection = {
   ui: {
     router: ({ document }) => {
       return `/${document._sys.breadcrumbs.join("/")}`;
-    }
+    },
+    filename: {
+      slugify: (values) => slugify(values.title || "", {
+        lower: true,
+        strict: true,
+        locale: "vi",
+      }),
+    },
   },
   fields: [
     {
