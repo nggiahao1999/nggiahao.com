@@ -7,7 +7,7 @@ const Post: Collection = {
   format: "mdx",
   ui: {
     router: ({ document }) => {
-      return `/${document._sys.breadcrumbs.join("/")}.html`;
+      return `/${document._sys.breadcrumbs.join("/")}`;
     }
   },
   fields: [
